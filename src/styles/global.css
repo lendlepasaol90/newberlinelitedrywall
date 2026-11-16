@@ -368,3 +368,7 @@ button { font: inherit; color: inherit; }
 .guide p { margin: 0 0 0.85rem; color: var(--muted); }
 .guide p:last-child { margin-bottom: 0; }
 @media (min-width: 58rem) { .guide { columns: 2; } }
+
+/* Logo images */
+.brand img.logo-head { height: 2.9rem; width: auto; display: block; }
+.brand img.logo-foot { height: 5.5rem; width: auto; display: block; }
