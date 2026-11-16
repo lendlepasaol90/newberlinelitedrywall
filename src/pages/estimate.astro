@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import EstimateForm from '../components/EstimateForm.astro';
+import { site, telHref } from '../config/site';
+
+const title = 'Get a Free Drywall Estimate | New Berlin Elite Drywall';
+const description = 'Request a free drywall estimate in New Berlin, WI. Tell us about your project, add photos if you can, and we will reply with a clear written price.';
+const schema = [{ '@type': 'BreadcrumbList', itemListElement: [
+  { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+  { '@type': 'ListItem', position: 2, name: 'Free estimate', item: `${site.url}/estimate/` },
+] }];
+---
+<Base title={title} description={description} schema={schema} inlineForm>
+  <section class="p-head">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li aria-current="page">Free estimate</li></ol></nav>
+      <h1>Let’s get you an estimate</h1>
+      <p class="big">Share what you can. A couple of photos help a lot, and it’s fine if you don’t know the right words for things.</p>
+    </div>
+  </section>
+  <section class="sec" style="padding-top:clamp(1.5rem,3vw,2.5rem)">
+    <div class="wrap est-page">
+      <div>
+        <h2 style="font-size:1.6rem;margin-bottom:1.25rem">What happens next</h2>
+        <ol class="path">
+          <li><h3>We read your message</h3><p>Properly, including the photos.</p></li>
+          <li><h3>We get back to you</h3><p>With a price if it’s simple, or a time to come and look.</p></li>
+          <li><h3>You decide</h3><p>You’ll have everything in writing. No obligation.</p></li>
+        </ol>
+        {(site.phone || site.email) && <p style="margin-top:1.5rem">Rather talk? {site.phone && <a class="link" href={telHref}>{site.phone}</a>} {site.email && <a class="link" href={`mailto:${site.email}`}>{site.email}</a>}</p>}
+      </div>
+      <div class="panel" id="estimate-form"><EstimateForm idPrefix="pg" /></div>
+    </div>
+  </section>
+</Base>
+<script>
+  const slug = new URLSearchParams(location.search).get('service');
+  if (slug) {
+    const select = document.querySelector<HTMLSelectElement>('#pg-service');
+    const opt = select?.querySelector<HTMLOptionElement>(`option[data-slug="${CSS.escape(slug)}"]`);
+    if (select && opt) select.value = opt.value;
+  }
+</script>

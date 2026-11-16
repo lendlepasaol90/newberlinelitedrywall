@@ -1,0 +1,181 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Arrow from '../components/Arrow.astro';
+import BeforeAfter from '../components/BeforeAfter.astro';
+import Faq from '../components/Faq.astro';
+import EstimateForm from '../components/EstimateForm.astro';
+import { site } from '../config/site';
+import { services } from '../data/services';
+import { photo } from '../lib/photos';
+
+const title = 'New Berlin Elite Drywall | Drywall Repair & Installation, New Berlin WI';
+const description = 'Friendly drywall repair, installation and finishing in New Berlin, WI. Holes, cracks, water damage, basements and remodels. Clear prices and free estimates.';
+
+const problems = [
+  { t: 'There’s a hole in the wall', d: 'Doorknobs, plumbers, accidents', slug: 'drywall-patching', icon: 'M5 5h14v14H5zM9.500 9.500l5 5M14.500 9.500l-5 5' },
+  { t: 'Cracks keep coming back', d: 'Above doors, along the ceiling', slug: 'drywall-repair', icon: 'M12 3l-3 6 5 3-4 5 3 4' },
+  { t: 'Water stain on the ceiling', d: 'After a leak or ice dam', slug: 'water-damaged-drywall-repair', icon: 'M12 3s6 6.500 6 10.500a6 6 0 0 1-12 0C6 9.500 12 3 12 3z' },
+  { t: 'I’m done with popcorn ceilings', d: 'Scraped and made smooth', slug: 'popcorn-ceiling-removal', icon: 'M3 6h18M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 13h.01M12 13h.01M16 13h.01M4 19h16' },
+  { t: 'We’re finishing the basement', d: 'Walls, ceilings and soffits', slug: 'basement-drywall-installation', icon: 'M3 10l9-6 9 6v10H3zM3 15h7v5M14 15h7' },
+  { t: 'New room or remodel', d: 'Hang, tape and finish', slug: 'drywall-installation', icon: 'M4 4h16v16H4zM4 12h16M12 4v16' },
+];
+const tips = [
+  { t: 'What finish level is included?', d: 'Level 4 is standard. Level 5 is smoother and costs more. If a quote doesn’t say, ask. It’s the biggest difference between two prices.' },
+  { t: 'How will you handle dust?', d: 'The answer should include plastic barriers, covered vents and vacuum sanding. “We’ll sweep up” isn’t enough.' },
+  { t: 'Is drying time in the schedule?', d: 'Each coat needs about a day. Anyone promising a full finish in two days is planning to rush it.' },
+];
+const faqs = [
+  { q: 'Is the estimate really free?', a: 'Yes. Send the form, add a photo or two if you can, and we’ll get back to you. For bigger jobs we’ll come out and measure. There’s no charge and no pressure either way.' },
+  { q: 'Do you do small jobs?', a: 'All the time. A single hole or one cracked ceiling is perfectly normal work for us. If you have a few small things, we’ll do them in one visit to keep the cost down.' },
+  { q: 'How long will it take?', a: 'A patch is one or two short visits. A room is about a week. A basement is about two. Most of that is waiting for coats to dry, so we’re not in your house all day.' },
+  { q: 'Will my house be a mess?', a: 'Drywall is dusty by nature, so we plan for it. The work area gets sealed with plastic, floors and vents are covered, and we sand with vacuum tools. We tidy up every day.' },
+  { q: 'Do I need to be home?', a: 'Only to let us in and for the final walkthrough. Plenty of customers leave us a key or a garage code.' },
+  { q: 'Where do you work?', a: `All over ${site.city}, plus nearby: ${site.serviceAreas.slice(1).join(', ')}. If you’re close to any of those, get in touch.` },
+];
+const schema = [{ '@type': 'FAQPage', '@id': `${site.url}/#faq`, mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }];
+const featured = services.filter((s) => ['residential-drywall-services', 'drywall-repair', 'popcorn-ceiling-removal', 'basement-drywall-installation', 'drywall-finishing', 'commercial-drywall-services'].includes(s.slug));
+const rest = services.filter((s) => !featured.includes(s));
+---
+<Base title={title} description={description} schema={schema}>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="pill up">Drywall in {site.city}, {site.state}</span>
+        <h1 class="up" style="--d:.08s">Good-looking walls, <em>without the runaround.</em></h1>
+        <p class="big up" style="--d:.2s">{site.name} fixes, hangs and finishes drywall for homeowners and local businesses. We’ll explain your options in plain English, give you a price in writing, and keep your place clean while we work.</p>
+        <div class="hero-actions up" style="--d:.3s">
+          <a class="btn btn-main" href="#hero-estimate">Get a free estimate <Arrow /></a>
+          <a class="btn btn-soft" href="#services">Explore our services</a>
+        </div>
+        <figure class="hero-photo up" style="--d:.4s">
+          <Picture src={photo('bright-empty-room-new-drywall-windows')} alt="Bright, freshly finished room with smooth white walls and rows of windows" widths={[600, 900, 1400]} sizes="(min-width: 62rem) 55vw, 100vw" formats={['avif', 'webp']} loading="eager" fetchpriority="high" />
+          <figcaption>Stock photo for illustration</figcaption>
+        </figure>
+      </div>
+      <div class="hero-form up" id="hero-estimate" style="--d:.25s">
+        <h2>Free estimate</h2>
+        <p>Tell us what’s going on. It takes about a minute.</p>
+        <EstimateForm idPrefix="hero" variant="snug" />
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head center">
+        <span class="pill reveal">Start here</span>
+        <h2 class="reveal">What’s going on with your walls?</h2>
+        <p class="big reveal">Pick the one that sounds familiar and we’ll show you what’s involved.</p>
+      </div>
+      <div class="picker">
+        {problems.map((p, i) => (
+          <a href={`/services/${p.slug}/`} class="reveal" style={`--d:${i * 0.05}s`}>
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={p.icon} /></svg></span>
+            <strong>{p.t}</strong>
+            <span>{p.d}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-mist" id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="pill reveal">Services</span>
+        <h2 class="reveal">Everything we do, in one place</h2>
+        <p class="big reveal">Twelve services, each with its own page that explains the work, the timing and what to expect.</p>
+      </div>
+      <div class="cards">
+        {featured.map((s, i) => (
+          <a class="card reveal" href={`/services/${s.slug}/`} style={`--d:${(i % 3) * 0.07}s`}>
+            <figure><Picture src={photo(s.photo)} alt="" widths={[400, 640]} sizes="(min-width: 58rem) 30vw, (min-width: 34rem) 46vw, 100vw" formats={['avif', 'webp']} loading="lazy" /></figure>
+            <div><h3>{s.name}</h3><p>{s.short}</p><span class="link">Learn more <Arrow /></span></div>
+          </a>
+        ))}
+      </div>
+      <ul class="towns plain" style="margin-top:2rem">
+        {rest.map((s) => <li class="reveal"><a href={`/services/${s.slug}/`}>{s.name}</a></li>)}
+        <li class="reveal" style="background:var(--sun);border-color:var(--sun)"><a href="/services/">See all twelve</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec sec-navy" id="how-it-works">
+    <div class="wrap">
+      <div class="sec-head center">
+        <span class="pill reveal">How it works</span>
+        <h2 class="reveal">Three steps. No surprises.</h2>
+      </div>
+      <ol class="three">
+        <li class="reveal"><h3>Tell us about it</h3><p>Fill in the form and add a photo if you can. For bigger jobs we’ll stop by and measure.</p></li>
+        <li class="reveal" style="--d:.1s"><h3>Get a clear price</h3><p>In writing, with what’s included and how long it’ll take. Ask us anything.</p></li>
+        <li class="reveal" style="--d:.2s"><h3>We do the work</h3><p>On the days we agreed, with your home protected. Then we walk through it together.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec sec-mist" id="good-to-know">
+    <div class="wrap tips">
+      <figure class="reveal">
+        <Picture src={photo('living-room-media-wall')} alt="Finished living room with smooth walls, recessed lights and a built-in media wall" widths={[480, 800, 1100]} sizes="(min-width: 54rem) 40vw, 100vw" formats={['avif', 'webp']} loading="lazy" />
+      </figure>
+      <div>
+        <span class="pill reveal">Good to know</span>
+        <h2 class="reveal">Three questions to ask any drywall contractor</h2>
+        <p class="big reveal" style="margin-top:1rem">Us included. The answers tell you a lot about the job you’re going to get.</p>
+        <ul class="tiplist">
+          {tips.map((t, i) => <li class="reveal" style={`--d:${i * 0.08}s`}><h3>{t.t}</h3><p>{t.d}</p></li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head center">
+        <span class="pill reveal">Before and after</span>
+        <h2 class="reveal">From taped seams to ready for paint</h2>
+        <p class="big reveal">Drag the handle to compare.</p>
+      </div>
+      <div class="ba-wrap reveal">
+        <BeforeAfter id="ba-home" before="new-house-interior-drywall-taped" after="bright-hall-spiral-staircase" beforeAlt="house interior with drywall hung and seams taped" afterAlt="bright finished interior with smooth white walls" />
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-mist" id="area">
+    <div class="wrap area">
+      <div>
+        <span class="pill reveal">Where we work</span>
+        <h2 class="reveal">Your neighbors in {site.city}</h2>
+        <p class="reveal" style="margin-top:1rem">Most of the homes we work in were built between the 1960s and the 1990s: ranches, split-levels and colonials along National Avenue, off Moorland Road and through the subdivisions in between. We also look after offices and industrial units in and around the business park.</p>
+        <p class="reveal">Being local means short drives, easy follow-up visits, and a good idea of what’s behind your walls before we open them.</p>
+      </div>
+      <ul class="towns reveal" style="--d:.1s">{site.serviceAreas.map((a) => <li>{a}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="sec" id="faq">
+    <div class="wrap">
+      <div class="sec-head center">
+        <span class="pill reveal">FAQ</span>
+        <h2 class="reveal">Questions we hear a lot</h2>
+      </div>
+      <div class="reveal"><Faq items={faqs} /></div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="cta-panel reveal">
+        <div>
+          <h2>Ready when you are.</h2>
+          <p>Tell us about your project and we’ll send a free, written estimate. No pressure, no jargon.</p>
+        </div>
+        <a class="btn btn-sun" href="/estimate/" data-estimate-open>Get a free estimate <Arrow /></a>
+      </div>
+    </div>
+  </section>
+</Base>
