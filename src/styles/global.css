@@ -372,3 +372,7 @@ button { font: inherit; color: inherit; }
 /* Logo images */
 .brand img.logo-head { height: 2.9rem; width: auto; display: block; }
 .brand img.logo-foot { height: 5.5rem; width: auto; display: block; }
+
+/* Footer map */
+.footer-map { margin-top: clamp(2rem, 4vw, 3rem); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+.footer-map iframe { display: block; width: 100%; height: clamp(15rem, 28vw, 21rem); border: 0; }
