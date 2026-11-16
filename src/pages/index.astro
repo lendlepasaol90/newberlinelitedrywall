@@ -8,6 +8,8 @@ import EstimateForm from '../components/EstimateForm.astro';
 import { site } from '../config/site';
 import { services } from '../data/services';
 import { photo } from '../lib/photos';
+import { homeGuide } from '../data/more-c';
+import { homeGuideMore } from '../data/more-d';
 
 const title = 'New Berlin Elite Drywall | Drywall Repair & Installation, New Berlin WI';
 const description = 'Friendly drywall repair, installation and finishing in New Berlin, WI. Holes, cracks, water damage, basements and remodels. Clear prices and free estimates.';
@@ -157,7 +159,27 @@ const rest = services.filter((s) => !featured.includes(s));
     </div>
   </section>
 
-  <section class="sec" id="faq">
+  <section class="sec" id="guide">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="pill reveal">Homeowner’s guide</span>
+        <h2 class="reveal">{homeGuide.h}</h2>
+        <p class="reveal">{homeGuide.lede}</p>
+      </div>
+      <div class="guide">
+        {[...homeGuide.sections, ...homeGuideMore].map((g) => (
+          <article>
+            <h3>{g.h}</h3>
+            {g.p.map((p) => <p>{p}</p>)}
+            {g.list && <ul class="checks">{g.list.map((li) => <li>{li}</li>)}</ul>}
+            {g.after?.map((p) => <p>{p}</p>)}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-mist" id="faq">
     <div class="wrap">
       <div class="sec-head center">
         <span class="pill reveal">FAQ</span>

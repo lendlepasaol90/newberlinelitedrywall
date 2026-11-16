@@ -7,6 +7,10 @@ import Faq from '../../components/Faq.astro';
 import { site } from '../../config/site';
 import { services, serviceBySlug, type Service } from '../../data/services';
 import { photo } from '../../lib/photos';
+import { moreA } from '../../data/more';
+import { moreB } from '../../data/more-b';
+import { notes } from '../../data/more-c';
+import { installNote } from '../../data/more-d';
 
 export function getStaticPaths() {
   return services.map((s) => ({ params: { slug: s.slug }, props: { s } }));
@@ -24,6 +28,8 @@ const schema = [
   ] },
   { '@type': 'FAQPage', mainEntity: s.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
 ];
+const extra = moreA[s.slug] ?? moreB[s.slug] ?? [];
+const goodToKnow = [...(notes[s.slug] ?? []), ...(s.slug === 'drywall-installation' ? [installNote] : [])];
 ---
 <Base title={s.title} description={s.description} ogPhoto={s.photo} schema={schema} stickyCta={s.slug}>
   <section class="s-hero">
@@ -59,11 +65,25 @@ const schema = [
           <h2>{s.benefits.h}</h2>
           <ul class="ticks">{s.benefits.items.map((b) => <li><h3>{b.t}</h3><p>{b.d}</p></li>)}</ul>
         </section>
+        {extra.map((e) => (
+          <section>
+            <h2>{e.h}</h2>
+            {e.p?.map((p) => <p>{p}</p>)}
+            {e.list && <ul class="checks">{e.list.map((li) => <li>{li}</li>)}</ul>}
+            {e.after?.map((p) => <p>{p}</p>)}
+          </section>
+        ))}
         <section>
           <h2>Before and after</h2>
           <BeforeAfter id={`ba-${s.slug}`} before={s.ba.before} after={s.ba.after} beforeAlt={s.ba.beforeAlt} afterAlt={s.ba.afterAlt} />
         </section>
         <section class="neighbor"><h2>{s.local.h}</h2>{s.local.p.map((p) => <p>{p}</p>)}</section>
+        {goodToKnow.length > 0 && (
+          <section class="gtk">
+            <h2>Good to know</h2>
+            {goodToKnow.map(([q, ans]) => <div><h3>{q}</h3><p>{ans}</p></div>)}
+          </section>
+        )}
         <section id="faq"><h2>Your questions about {plain}</h2><Faq items={s.faqs} /></section>
       </div>
     </div>
