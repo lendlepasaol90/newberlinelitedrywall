@@ -107,7 +107,7 @@ const year = new Date().getFullYear();
               <li class="nav-drop" data-drop>
                 <button type="button" aria-expanded="false" aria-controls="services-panel">Services <svg viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M1 1.5l5 5 5-5"/></svg></button>
                 <div class="drop-panel" id="services-panel">
-                  {services.map((s) => <a href={`/services/${s.slug}/`}>{s.name}</a>)}
+                  {services.map((s) => <a href={`/${s.slug}/`}>{s.name}</a>)}
                   <a class="all" href="/services/">See all services</a>
                 </div>
               </li>
@@ -131,7 +131,7 @@ const year = new Date().getFullYear();
           <details>
             <summary>Services</summary>
             <ul>
-              {services.map((s) => <li><a href={`/services/${s.slug}/`}>{s.name}</a></li>)}
+              {services.map((s) => <li><a href={`/${s.slug}/`}>{s.name}</a></li>)}
               <li><a href="/services/">See all services</a></li>
             </ul>
           </details>
@@ -164,7 +164,7 @@ const year = new Date().getFullYear();
           <div>
             <h2>What we do</h2>
             <ul class="footer-services">
-              {services.map((s) => <li><a href={`/services/${s.slug}/`}>{s.name}</a></li>)}
+              {services.map((s) => <li><a href={`/${s.slug}/`}>{s.name}</a></li>)}
             </ul>
           </div>
           <div>

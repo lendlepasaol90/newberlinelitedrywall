@@ -72,7 +72,7 @@ const rest = services.filter((s) => !featured.includes(s));
       </div>
       <div class="picker">
         {problems.map((p, i) => (
-          <a href={`/services/${p.slug}/`} class="reveal" style={`--d:${i * 0.05}s`}>
+          <a href={`/${p.slug}/`} class="reveal" style={`--d:${i * 0.05}s`}>
             <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={p.icon} /></svg></span>
             <strong>{p.t}</strong>
             <span>{p.d}</span>
@@ -91,14 +91,14 @@ const rest = services.filter((s) => !featured.includes(s));
       </div>
       <div class="cards">
         {featured.map((s, i) => (
-          <a class="card reveal" href={`/services/${s.slug}/`} style={`--d:${(i % 3) * 0.07}s`}>
+          <a class="card reveal" href={`/${s.slug}/`} style={`--d:${(i % 3) * 0.07}s`}>
             <figure><Picture src={photo(s.photo)} alt="" widths={[400, 640]} sizes="(min-width: 58rem) 30vw, (min-width: 34rem) 46vw, 100vw" formats={['avif', 'webp']} loading="lazy" /></figure>
             <div><h3>{s.name}</h3><p>{s.short}</p><span class="link">Learn more <Arrow /></span></div>
           </a>
         ))}
       </div>
       <ul class="towns plain" style="margin-top:2rem">
-        {rest.map((s) => <li class="reveal"><a href={`/services/${s.slug}/`}>{s.name}</a></li>)}
+        {rest.map((s) => <li class="reveal"><a href={`/${s.slug}/`}>{s.name}</a></li>)}
         <li class="reveal" style="background:var(--sun);border-color:var(--sun)"><a href="/services/">See all twelve</a></li>
       </ul>
     </div>
