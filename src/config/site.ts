@@ -20,21 +20,29 @@ export const site = {
   city: 'New Berlin',
   state: 'Wisconsin',
   stateAbbr: 'WI',
-  mapQuery: 'New Berlin, WI' as string, // what the footer Google Map shows; change to the full street address once confirmed ('' hides the map)
+  mapQuery: 'New Berlin Elite Drywall, 16500 W Glendale Dr #150, New Berlin, WI 53151' as string, // what the footer Google Map shows ('' hides the map)
 
-  // --- Contact (PLACEHOLDERS — leave empty until confirmed) ----------------
-  phone: '' as string, // e.g. '(262) 555-0100' — displayed as written
-  email: '' as string, // e.g. 'estimates@newberlinelitedrywall.com'
+  // --- Contact ------------------------------------------------------------
+  phone: '(262) 710-2107' as string, // displayed as written
+  email: 'office@newberlinelitedrywall.com' as string,
   address: {
-    street: '' as string,
-    city: '' as string,
-    region: '' as string,
-    postalCode: '' as string,
+    street: '16500 W Glendale Dr #150' as string,
+    city: 'New Berlin' as string,
+    region: 'WI' as string,
+    postalCode: '53151' as string,
   },
-  hours: '' as string, // e.g. 'Mon–Fri 7am–5pm'
+  hours: 'Mon–Sat 7am–6pm · Sunday closed' as string, // shown in the footer
+  // Opening hours for structured data (24-hour times). Days not listed are closed.
+  openingHours: [
+    { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '07:00', closes: '18:00' },
+  ],
+  owner: 'Nick Finch' as string,
+  category: 'Drywall Contractor',
+  about:
+    'New Berlin Elite Drywall helps homeowners and businesses throughout New Berlin, WI, transform unfinished, outdated, and damaged interiors into clean, beautifully finished spaces. Our drywall services include new drywall installation, sheetrock replacement, drywall repairs, wall patching, ceiling repairs, taping, mudding, sanding, and professional drywall finishing. From basement finishing and home renovations to new construction and commercial improvements, we handle projects of all sizes with careful attention to detail. Whether you’re repairing a damaged wall or preparing an entire property for painting, New Berlin Elite Drywall is ready to help. Proudly serving New Berlin, Brookfield, Muskego, Waukesha, West Allis, and surrounding Wisconsin communities.',
 
-  // --- Service areas (PLACEHOLDER — confirm the list you actually serve) ---
-  serviceAreas: ['New Berlin', 'Brookfield', 'Waukesha', 'Muskego', 'West Allis', 'Greenfield', 'Hales Corners', 'Elm Grove'],
+  // --- Service areas -------------------------------------------------------
+  serviceAreas: ['New Berlin', 'Brookfield', 'Muskego', 'Waukesha', 'West Allis'],
 
   // --- Social profiles (PLACEHOLDERS) --------------------------------------
   social: {

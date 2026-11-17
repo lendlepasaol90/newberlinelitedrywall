@@ -376,3 +376,17 @@ button { font: inherit; color: inherit; }
 /* Footer map */
 .footer-map { margin-top: clamp(2rem, 4vw, 3rem); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
 .footer-map iframe { display: block; width: 100%; height: clamp(15rem, 28vw, 21rem); border: 0; }
+
+/* Header phone + homepage About block */
+.header-phone { font-weight: 700; font-size: 0.98rem; color: var(--navy); text-decoration: none; white-space: nowrap; margin-right: 0.4rem; }
+.header-phone:hover { color: var(--blue); }
+@media (max-width: 74rem) { .header-phone { display: none; } }
+.facts { margin: 0; background: var(--white); border: 1px solid var(--line); border-radius: var(--r); padding: 0.5rem 1.4rem; box-shadow: 0 10px 30px rgba(18, 35, 58, 0.06); }
+.facts > div { display: grid; grid-template-columns: 5.5rem 1fr; gap: 1rem; padding: 0.9rem 0; border-bottom: 1px solid var(--line); }
+.facts dt { font-weight: 700; color: var(--navy); }
+.facts > div:last-child { border-bottom: 0; }
+.facts dd { margin: 0; overflow-wrap: anywhere; }
+.facts a { color: inherit; }
+.about { display: grid; gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
+@media (min-width: 60rem) { .about { grid-template-columns: 1.15fr 1fr; } }
+.mobile-menu .menu-phone { display: block; font-weight: 700; margin: 1rem 0 0.75rem; }
