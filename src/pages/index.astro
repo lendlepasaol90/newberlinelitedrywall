@@ -11,7 +11,7 @@ import { photo } from '../lib/photos';
 import { homeGuide } from '../data/more-c';
 import { homeGuideMore } from '../data/more-d';
 
-const title = 'New Berlin Elite Drywall | Drywall Repair & Installation, New Berlin WI';
+const title = `Drywall Repair & Install in ${site.city}, ${site.stateAbbr} - Drywall Contractor Service`;
 const description = 'Friendly drywall repair, installation and finishing in New Berlin, WI. Holes, cracks, water damage, basements and remodels. Clear prices and free estimates.';
 
 const problems = [
@@ -44,7 +44,7 @@ const rest = services.filter((s) => !featured.includes(s));
     <div class="wrap hero-grid">
       <div>
         <span class="pill up">Drywall in {site.city}, {site.state}</span>
-        <h1 class="up" style="--d:.08s">Good-looking walls, <em>without the runaround.</em></h1>
+        <h1 class="up" style="--d:.08s">Drywall Repair &amp; Installation <em>in {site.city}, {site.stateAbbr}</em></h1>
         <p class="big up" style="--d:.2s">{site.name} fixes, hangs and finishes drywall for homeowners and local businesses. We’ll explain your options in plain English, give you a price in writing, and keep your place clean while we work.</p>
         <div class="hero-actions up" style="--d:.3s">
           <a class="btn btn-main" href="#hero-estimate">Get a free estimate <Arrow /></a>
